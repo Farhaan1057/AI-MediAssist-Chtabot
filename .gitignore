@@ -1,0 +1,11 @@
+# Streamlit & Python cache files
+.streamlit/
+__pycache__/
+*.pyc
+.pytest_cache/
+.DS_Store
+
+# Virtual Environments
+venv/
+.venv/
+env/
