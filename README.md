@@ -3,7 +3,8 @@
 A domain-specific healthcare assistant chatbot with intent recognition and multi-turn conversation.
 
 ## Tech Stack
-- Python, Streamlit, Groq API (LLaMA 3.3 70B)
+- Python, Streamlit
+- Groq API (LLaMA 3.3 70B)
 
 ## Setup & Run
 
