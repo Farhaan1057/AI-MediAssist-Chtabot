@@ -1,5 +1,4 @@
 # MediAssist — Healthcare Chatbot
-**OptimusAutomate AI Internship — Task 2**
 
 A domain-specific healthcare assistant chatbot with intent recognition and multi-turn conversation.
 
