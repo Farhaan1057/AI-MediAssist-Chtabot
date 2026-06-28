@@ -5,7 +5,6 @@ from intents import detect_intent, is_emergency, EMERGENCY_RESPONSE
 
 st.set_page_config(page_title="MediAssist", page_icon="🩺", layout="wide", initial_sidebar_state="expanded")
 
-# ── Session state initialization ──
 if "messages" not in st.session_state:
     st.session_state.messages = []
 if "chat_history" not in st.session_state:
@@ -13,10 +12,9 @@ if "chat_history" not in st.session_state:
 if "theme" not in st.session_state:
     st.session_state.theme = "dark"
 
-# Force configuration attribute immediately
+
 theme_attr = 'data-theme="light"' if st.session_state.theme == "light" else 'data-theme="dark"'
 
-# ── CRITICAL CSS OVERHAUL: EXACT SLEEK MATCH ──
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
@@ -171,7 +169,6 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Apply root theme class dynamically via JS injection
 st.markdown(f'<script>document.documentElement.setAttribute("data-theme", "{st.session_state.theme}")</script>', unsafe_allow_html=True)
 
 def start_new_chat():
@@ -179,7 +176,6 @@ def start_new_chat():
         st.session_state.chat_history.insert(0, st.session_state.messages.copy())
     st.session_state.messages = []
 
-# ── Sidebar Structural Setup ──
 with st.sidebar:
     st.markdown('<div class="sidebar-title">MediAssist</div>', unsafe_allow_html=True)
     st.markdown('<div class="sidebar-sub">Your Personal Healthcare Assistant</div>', unsafe_allow_html=True)
@@ -188,7 +184,7 @@ with st.sidebar:
         start_new_chat()
         st.rerun()
 
-    theme_label = "☀️ Light Mode" if st.session_state.theme == "dark" else "🌙 Dark Mode"
+    theme_label = "Light Mode" if st.session_state.theme == "dark" else "Dark Mode"
     if st.button(theme_label, use_container_width=True, key="theme_toggle"):
         st.session_state.theme = "light" if st.session_state.theme == "dark" else "dark"
         st.rerun()
@@ -207,10 +203,7 @@ with st.sidebar:
 
     st.markdown('<div class="sidebar-footer">MediAssist does not replace professional medical advice. Always consult a qualified healthcare provider.</div>', unsafe_allow_html=True)
 
-
-# ── Main Chat Canvas Logic ──
 if not st.session_state.messages:
-    # Beautiful, Clean Landing Interface mimicking your reference images
     st.markdown(f"""
     <div class="welcome">
         <div class="welcome-heading">How can I help you today?</div>
@@ -229,11 +222,9 @@ else:
         if msg.get("emergency"):
             st.markdown(f'<div class="emergency-msg">{msg["content"]}</div>', unsafe_allow_html=True)
         else:
-            # Renders text cleanly inside a transparent element without any boxed clutter
             with st.chat_message(msg["role"], avatar="🩺" if msg["role"] == "assistant" else "👤"):
                 st.markdown(msg["content"])
 
-# ── Dynamic Input Handler ──
 if prompt := st.chat_input("Ask a health question..."):
     st.session_state.messages.append({"role": "user", "content": prompt})
 
@@ -251,8 +242,7 @@ if prompt := st.chat_input("Ask a health question..."):
             
             full_response = get_response(history)
             displayed = ""
-            
-            # Streaming engine maintaining crisp typography rules
+        
             for char in full_response:
                 displayed += char
                 placeholder.markdown(displayed + "▌")
