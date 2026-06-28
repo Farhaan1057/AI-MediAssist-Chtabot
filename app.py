@@ -12,7 +12,6 @@ if "chat_history" not in st.session_state:
 if "theme" not in st.session_state:
     st.session_state.theme = "dark"
 
-
 theme_attr = 'data-theme="light"' if st.session_state.theme == "light" else 'data-theme="dark"'
 
 st.markdown("""
